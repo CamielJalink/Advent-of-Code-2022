@@ -1,0 +1,19 @@
+{
+  "name": "advent-of-code-2022",
+  "version": "1.0.0",
+  "description": "Repository for solving the 2022 Advent-of-Code programming puzzles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CamielJalink/Advent-of-Code-2022.git"
+  },
+  "author": "CJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CamielJalink/Advent-of-Code-2022/issues"
+  },
+  "homepage": "https://github.com/CamielJalink/Advent-of-Code-2022#readme"
+}
