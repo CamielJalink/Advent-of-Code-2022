@@ -1,29 +1,31 @@
 {
-  "name": "advent-of-code-2022",
-  "version": "1.0.0",
-  "description": "Repository for solving the 2022 Advent-of-Code programming puzzles",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CamielJalink/Advent-of-Code-2022.git"
-  },
-  "author": "CJ",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/CamielJalink/Advent-of-Code-2022/issues"
-  },
-  "homepage": "https://github.com/CamielJalink/Advent-of-Code-2022#readme",
-  "dependencies": {
-    "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^5.44.0",
-    "@typescript-eslint/parser": "^5.44.0",
-    "eslint": "^8.28.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.0",
-    "typescript": "^4.9.3"
-  }
+    "name": "advent-of-code-2022",
+    "version": "1.0.0",
+    "description": "Repository for solving the 2022 Advent-of-Code programming puzzles",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "generateDay": "node generateDay.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/CamielJalink/Advent-of-Code-2022.git"
+    },
+    "author": "CJ",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/CamielJalink/Advent-of-Code-2022/issues"
+    },
+    "homepage": "https://github.com/CamielJalink/Advent-of-Code-2022#readme",
+    "dependencies": {
+        "@types/node": "^18.11.9",
+        "@typescript-eslint/eslint-plugin": "^5.44.0",
+        "@typescript-eslint/parser": "^5.44.0",
+        "eslint": "^8.28.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "prettier": "^2.8.0",
+        "prompt-sync": "^4.2.0",
+        "typescript": "^4.9.3"
+    }
 }
