@@ -4,15 +4,16 @@ let day = "day" + prompt("Which day do you wish to generate? Day:");
 
 fs.rmSync("./src/" + day, { recursive: true, force: true });
 
-const typeScriptBoilerplate = `import { readFileSync } from "fs";
+const indexBoilerPlate = `import rawInput from "./input";
 
 function advent() {
-    const stringInput = readFileSync("input.txt", "utf-8");
-    const input = stringInput.split("\\r\\n");
+    const input = rawInput.split("\\r\\n");
     console.log(input);
 }
 
 advent();`;
+
+const inputBoilerPlate = `export default "";`;
 
 if (!fs.existsSync("./src/" + day)) {
     fs.mkdirSync("./src/" + day);
@@ -26,6 +27,6 @@ if (!fs.existsSync("./src/" + day)) {
 
 function createStructure(dirName) {
     fs.mkdirSync(dirName);
-    fs.writeFileSync(dirName + "/index.ts", typeScriptBoilerplate);
-    fs.writeFileSync(dirName + "/input.txt", "12345");
+    fs.writeFileSync(dirName + "/index.ts", indexBoilerPlate);
+    fs.writeFileSync(dirName + "/input.ts", inputBoilerPlate);
 }
