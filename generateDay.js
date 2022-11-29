@@ -18,5 +18,6 @@ function createStructure(dirName) {
     fs.mkdirSync(dirName);
     console.log(dirName);
 
-    fs.open(dirName + "/index.js", "wx", function () {});
+    fs.open(dirName + "/index.ts", "wx", function () {});
+    fs.open(dirName + "/input.txt", "wx", function () {});
 }
