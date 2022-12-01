@@ -13,7 +13,7 @@ function advent() {
 
 advent();`;
 
-const inputBoilerPlate = `export default "";`;
+const inputBoilerPlate = `export default \`\`;`;
 
 if (!fs.existsSync("./src/" + day)) {
     fs.mkdirSync("./src/" + day);
