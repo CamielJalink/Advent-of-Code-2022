@@ -1,6 +1,6 @@
 import rawInput from "./input";
 
-function advent() {
+export default function advent() {
     const input = rawInput.split("\n\n");
     findTopThreeElvesMostCalories(input);
 }
@@ -21,5 +21,3 @@ function findTopThreeElvesMostCalories(caloriePacks: string[]) {
     elfPacks.sort();
     console.log(elfPacks[elfPacks.length - 1] + elfPacks[elfPacks.length - 2] + elfPacks[elfPacks.length - 3]);
 }
-
-advent();

@@ -4,14 +4,20 @@ let day = "day" + prompt("Which day do you wish to generate? Day:");
 
 const indexBoilerPlate = `import rawInput from "./input";
 
-function advent() {
+export default function advent() {
     const input = rawInput.split("\\r\\n");
     console.log(input);
-}
-
-advent();`;
+}`;
 
 const inputBoilerPlate = `export default \`\`;`;
+
+const startPart1Boilerplate = `import advent from "./${day}/part1";
+advent();`;
+const startPart2Boilerplate = `import advent from "./${day}/part2";
+advent();`;
+
+fs.writeFileSync("./src/startPart1.ts", startPart1Boilerplate);
+fs.writeFileSync("./src/startPart2.ts", startPart2Boilerplate);
 
 if (!fs.existsSync("./src/" + day)) {
     fs.mkdirSync("./src/" + day);
@@ -20,7 +26,7 @@ if (!fs.existsSync("./src/" + day)) {
     createStructure(part1);
     createStructure(part2);
 } else {
-    console.log(day + "already exists!");
+    console.log(day + " already exists!");
 }
 
 function createStructure(dirName) {

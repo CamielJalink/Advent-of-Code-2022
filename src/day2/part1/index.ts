@@ -1,6 +1,6 @@
 import rawInput from "./input";
 
-function advent() {
+export default function advent() {
     const input = rawInput.split("\n");
     console.log(checkStrategy(input));
 }
@@ -63,5 +63,3 @@ function playGame(game: string) {
 
     return myScore;
 }
-
-advent();
