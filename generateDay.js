@@ -2,8 +2,6 @@ const fs = require("fs");
 const prompt = require("prompt-sync")();
 let day = "day" + prompt("Which day do you wish to generate? Day:");
 
-// fs.rmSync("./src/" + day, { recursive: true, force: true });
-
 const indexBoilerPlate = `import rawInput from "./input";
 
 function advent() {
