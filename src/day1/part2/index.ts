@@ -1,7 +1,7 @@
 import rawInput from "./input";
 
 export default function advent() {
-    const input = rawInput.split("\n\n");
+    const input = rawInput.split(/\n\n/gm);
     findTopThreeElvesMostCalories(input);
 }
 

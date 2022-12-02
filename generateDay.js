@@ -5,7 +5,7 @@ let day = "day" + prompt("Which day do you wish to generate? Day:");
 const indexBoilerPlate = `import rawInput from "./input";
 
 export default function advent() {
-    const input = rawInput.split("\\r\\n");
+    const input = rawInput.split(/\\n\\n/gm);
     console.log(input);
 }`;
 
