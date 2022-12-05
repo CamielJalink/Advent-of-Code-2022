@@ -6,11 +6,9 @@ export default function advent() {
 }
 
 function findCode(input: string[]) {
-    const stacks: string[][] = parseStacks(input[0]);
-    console.log(stacks);
-    const code = "";
-
-    return code;
+    let stacks: string[][] = parseStacks(input[0]);
+    stacks = followInstructions(stacks, input[1]);
+    return fillCode(stacks);
 }
 
 //    [D]
@@ -36,6 +34,7 @@ function parseStacks(input: string) {
             }
         }
     });
+    console.log(stacks);
     return stacks;
 }
 
@@ -43,3 +42,43 @@ function parseStacks(input: string) {
 //move 3 from 1 to 3
 //move 2 from 2 to 1
 //move 1 from 1 to 2
+
+function followInstructions(stacks: string[][], stringInstructions: string) {
+    const instructions = stringInstructions.split("\n");
+    instructions.forEach((instruction: string) => {
+        const instructionArray = instruction.split(" ");
+        const amount = parseInt(instructionArray[1]);
+        const fromStack = parseInt(instructionArray[3]) - 1; // -1 because our stacks array starts with index 0.
+        const toStack = parseInt(instructionArray[5]) - 1;
+        // console.log("before:");
+        // console.log(stacks);
+        for (let i = 0; i < amount; i++) {
+            stacks = useCrane(stacks, fromStack, toStack);
+        }
+        // console.log("after:");
+        // console.log(stacks);
+    });
+
+    return stacks;
+}
+
+function useCrane(stacks: string[][], fromStack: number, toStack: number) {
+    const cargo = stacks[fromStack].shift() || "";
+    stacks[toStack].unshift(cargo);
+    return stacks;
+}
+
+function fillCode(stacks: string[][]) {
+    console.log(stacks);
+
+    let code = "";
+    stacks.forEach((stack: string[]) => {
+        code += stack[0];
+    });
+
+    return code;
+}
+
+// Eerste guess was VDSHJMMZ
+// Tweede guess was HHZPLFJQZ
+// Derde guess was VQSDLFQMZ
