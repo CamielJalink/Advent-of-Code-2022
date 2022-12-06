@@ -79,7 +79,3 @@ function fillCode(stacks: string[][]) {
 
     return code;
 }
-
-// Eerste guess was VDSHJMMZ
-// Tweede guess was HHZPLFJQZ
-// Derde guess was VQSDLFQMZ
