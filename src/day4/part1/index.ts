@@ -1,7 +1,8 @@
-import rawInput from "./input";
+import { readFileSync } from "fs";
 
 export default function advent() {
-    const input = rawInput.split(/\n/gm);
+    const stringInput = readFileSync("input/day4.txt", "utf-8");
+    const input = stringInput.split("\n");
     console.log(numberFullyContains(input));
 }
 
@@ -26,7 +27,6 @@ function rangeContainsOther(elfPair: string) {
         oneAreaContainsOther++;
     }
     if (elf1Lower === elf2Lower && elf1Upper === elf2Upper) {
-        console.log("found one where they are equal");
         oneAreaContainsOther = 0;
     }
 
