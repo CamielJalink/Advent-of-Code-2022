@@ -3,7 +3,6 @@ import { readFileSync } from "fs";
 export default function advent() {
     const stringInput = readFileSync("input/day5.txt", "utf-8");
     const input = stringInput.split("\n\n");
-    console.log(input.length);
     console.log(findCode(input));
 }
 
@@ -51,27 +50,26 @@ function followInstructions(stacks: string[][], stringInstructions: string) {
         const amount = parseInt(instructionArray[1]);
         const fromStack = parseInt(instructionArray[3]) - 1; // -1 because our stacks array starts with index 0.
         const toStack = parseInt(instructionArray[5]) - 1;
-        // console.log("before:");
-        // console.log(stacks);
-        for (let i = 0; i < amount; i++) {
-            stacks = useCrane(stacks, fromStack, toStack);
-        }
-        // console.log("after:");
-        // console.log(stacks);
+        stacks = useCrane(stacks, amount, fromStack, toStack);
     });
 
     return stacks;
 }
 
-function useCrane(stacks: string[][], fromStack: number, toStack: number) {
-    const cargo = stacks[fromStack].shift() || "";
-    stacks[toStack].unshift(cargo);
+function useCrane(stacks: string[][], amount: number, fromStack: number, toStack: number) {
+    const cargo: string[] = [];
+    for (let i = 0; i < amount; i++) {
+        cargo.unshift(stacks[fromStack].shift() || "");
+    }
+
+    cargo.forEach((cargoItem: string) => {
+        stacks[toStack].unshift(cargoItem);
+    });
+
     return stacks;
 }
 
 function fillCode(stacks: string[][]) {
-    console.log(stacks);
-
     let code = "";
     stacks.forEach((stack: string[]) => {
         code += stack[0];
