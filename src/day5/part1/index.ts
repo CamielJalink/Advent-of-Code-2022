@@ -1,7 +1,9 @@
-import rawInput from "./input";
+import { readFileSync } from "fs";
 
 export default function advent() {
-    const input = rawInput.split(/\n\n/gm);
+    const stringInput = readFileSync("input/day5.txt", "utf-8");
+    const input = stringInput.split("\n\n");
+    console.log(input.length);
     console.log(findCode(input));
 }
 
@@ -34,7 +36,6 @@ function parseStacks(input: string) {
             }
         }
     });
-    console.log(stacks);
     return stacks;
 }
 

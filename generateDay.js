@@ -2,14 +2,13 @@ const fs = require("fs");
 const prompt = require("prompt-sync")();
 let day = "day" + prompt("Which day do you wish to generate? Day:");
 
-const indexBoilerPlate = `import rawInput from "./input";
+const indexBoilerPlate = `import { readFileSync } from "fs";
 
 export default function advent() {
-    const input = rawInput.split(/\\n\\n/gm);
+    const stringInput = readFileSync("input/${day}-test.txt", "utf-8");
+    const input = stringInput.split(/\\n\\n/gm);
     console.log(input);
 }`;
-
-const inputBoilerPlate = `export default \`\`;`;
 
 const startPart1Boilerplate = `import advent from "./${day}/part1";
 advent();`;
@@ -25,6 +24,8 @@ if (!fs.existsSync("./src/" + day)) {
     const part2 = "./src/" + day + "/part2";
     createStructure(part1);
     createStructure(part2);
+    fs.writeFileSync("./input/" + day + "-test.txt", "");
+    fs.writeFileSync("./input/" + day + ".txt", "");
 } else {
     console.log(day + " already exists!");
 }
@@ -32,5 +33,4 @@ if (!fs.existsSync("./src/" + day)) {
 function createStructure(dirName) {
     fs.mkdirSync(dirName);
     fs.writeFileSync(dirName + "/index.ts", indexBoilerPlate);
-    fs.writeFileSync(dirName + "/input.ts", inputBoilerPlate);
 }
