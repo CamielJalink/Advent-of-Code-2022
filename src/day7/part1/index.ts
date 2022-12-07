@@ -36,29 +36,36 @@ function findDirs(input: string[]) {
     let activeItem: Item;
 
     input.forEach((line: string) => {
-        // Als cd, dan:
-        // Zoek de active item.
-        // Als hij nog niet bestaat, maak hem aan en maak hem active.
-
         if (line.substring(0, 4) === "$ cd") {
             const cdParam = line.split(" ")[2];
 
             if (cdParam === "/") {
-                activeItem = findOrCreateItem(items, "/");
+                activeItem = findOrCreateDir(items, "/");
             } else if (cdParam === "..") {
                 activeItem = activeItem.parent ? activeItem.parent : activeItem;
             } else {
                 const previousItem: Item = activeItem;
-                activeItem = findOrCreateItem(items, cdParam);
+                activeItem = findOrCreateDir(items, cdParam);
                 if (!activeItem.parent) {
                     activeItem.parent = previousItem;
                 }
             }
+        } else if (line[0] !== "$") {
+            checkChildren(items, activeItem, line);
         }
     });
 }
 
-function findOrCreateItem(items: Item[], itemName: string) {
+// & ls is eigenlijk een overbodige command waar ik niks mee hoef.
+// De active directory verandert namelijk niet!
+// Alle dingen die niet met een '$' starten zijn bestanden in m'n huidige directory.
+// Als die nog niet bestaan, maak ze aan, voeg ze aan mijn children toe, en maak mij hun parent.
+
+function checkChildren(items: Item[], dir: Item, line: string) {
+    console.log("test");
+}
+
+function findOrCreateDir(items: Item[], itemName: string) {
     let activeItem: Item;
 
     items.forEach((item: Item) => {
