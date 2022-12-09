@@ -34,7 +34,6 @@ function findDirs(input: string[]) {
     let puzzleAnswer = 0;
     items.forEach((item: Item) => {
         if (item.determineSize() <= 100000) {
-            console.log(item.name, "has size", item.size);
             puzzleAnswer += item.size;
         }
     });
