@@ -11,4 +11,14 @@ export default class Item {
         this.size = size ? parseInt(size) : 0;
         this.parent = parent;
     }
+
+    determineSize() {
+        if (this.type === "dir") {
+            this.size = 0;
+            this.children.forEach((child: Item) => {
+                this.size += child.determineSize();
+            });
+        }
+        return this.size;
+    }
 }

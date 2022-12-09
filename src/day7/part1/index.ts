@@ -2,79 +2,93 @@ import { readFileSync } from "fs";
 import Item from "./item";
 
 export default function advent() {
-    const stringInput = readFileSync("input/day7-test.txt", "utf-8");
+    const stringInput = readFileSync("input/day7.txt", "utf-8");
     const input = stringInput.split(/\n/gm);
     console.log(findDirs(input));
 }
 
-// $ cd /
-// $ ls
-// dir a
-// 14848514 b.txt
-// 8504156 c.dat
-// dir d
-// $ cd a
-// $ ls
-// dir e
-// 29116 f
-// 2557 g
-// 62596 h.lst
-// $ cd e
-// $ ls
-// 584 i
-// $ cd ..
-// $ cd ..
-// $ cd d
-// $ ls
-// 4060174 j
-// 8033020 d.log
-// 5626152 d.ext
-// 7214296 k
-
 function findDirs(input: string[]) {
     const items: Item[] = [];
-    let activeItem: Item;
+    let activeDir: Item;
 
     input.forEach((line: string) => {
         if (line.substring(0, 4) === "$ cd") {
             const cdParam = line.split(" ")[2];
 
             if (cdParam === "/") {
-                activeItem = findOrCreateDir(items, "/");
+                activeDir = findOrCreateDir(items, "/");
             } else if (cdParam === "..") {
-                activeItem = activeItem.parent ? activeItem.parent : activeItem;
+                activeDir = activeDir.parent ? activeDir.parent : activeDir;
             } else {
-                const previousItem: Item = activeItem;
-                activeItem = findOrCreateDir(items, cdParam);
-                if (!activeItem.parent) {
-                    activeItem.parent = previousItem;
+                const previousItem: Item = activeDir;
+                activeDir = findOrCreateDir(items, activeDir.name + "/" + cdParam);
+                if (!activeDir.parent) {
+                    activeDir.parent = previousItem;
                 }
             }
         } else if (line[0] !== "$") {
-            checkChildren(items, activeItem, line);
+            checkChildren(items, activeDir, line);
         }
     });
+
+    let puzzleAnswer = 0;
+    items.forEach((item: Item) => {
+        if (item.determineSize() <= 100000) {
+            console.log(item.name, "has size", item.size);
+            puzzleAnswer += item.size;
+        }
+    });
+    return puzzleAnswer;
 }
 
-// & ls is eigenlijk een overbodige command waar ik niks mee hoef.
-// De active directory verandert namelijk niet!
 // Alle dingen die niet met een '$' starten zijn bestanden in m'n huidige directory.
 // Als die nog niet bestaan, maak ze aan, voeg ze aan mijn children toe, en maak mij hun parent.
+function checkChildren(items: Item[], activeDir: Item, line: string) {
+    const [param, name] = line.split(" ");
 
-function checkChildren(items: Item[], dir: Item, line: string) {
-    console.log("test");
+    // If the next line starts with "dir", it is a child directory of activeDir
+    if (param === "dir") {
+        // Check to see if this dir already exists or else create it.
+        const dir = findOrCreateDir(items, activeDir.name + "/" + name);
+        // Link the two dirs together via children and parent properties
+        if (!activeDir.children.includes(dir) && activeDir !== dir) {
+            activeDir.children.push(dir);
+            dir.parent = activeDir;
+        }
+    } else {
+        findOrCreateFile(activeDir, name, param);
+    }
+}
+
+function findOrCreateFile(parentDir: Item, fileName: string, fileSize: string) {
+    let fileAlreadyExists = false;
+
+    for (const child of parentDir.children) {
+        if (child.type === "file" && child.name === fileName) {
+            fileAlreadyExists = true;
+            break;
+        }
+    }
+
+    if (!fileAlreadyExists) {
+        parentDir.children.push(new Item("file", fileName, parentDir, fileSize));
+        parentDir.size += parseInt(fileSize);
+    }
 }
 
 function findOrCreateDir(items: Item[], itemName: string) {
-    let activeItem: Item;
+    let dir: Item | undefined = undefined;
 
     items.forEach((item: Item) => {
-        if (item.name === itemName) {
-            activeItem = item;
-            return activeItem;
+        if (item.name === itemName && item.type === "dir") {
+            dir = item;
         }
     });
 
-    activeItem = new Item("dir", itemName);
-    return activeItem;
+    if (dir === undefined) {
+        dir = new Item("dir", itemName);
+        items.push(dir);
+    }
+
+    return dir;
 }
