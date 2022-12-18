@@ -32,7 +32,6 @@ function findSumSignalStrengths(input: string[]) {
         const c = cycleXvalue[0];
         const x = cycleXvalue[1];
         if (c === 20 || c === 60 || c === 100 || c === 140 || c === 180 || c === 220) {
-            // console.log("in cycle", c, "we had xvalue", cycleXvalue[1], "with signal strength", c * cycleXvalue[1]);
             totalSignalStrength += c * x;
         }
     });

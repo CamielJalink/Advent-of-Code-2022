@@ -1,2 +1,2 @@
-import advent from "./day10/part2";
+import advent from "./day11/part2";
 advent();
