@@ -4,8 +4,8 @@
     "description": "Repository for solving the 2022 Advent-of-Code programming puzzles",
     "main": "index.js",
     "scripts": {
-        "startPart1": "npm run lint && tsc && node ./dist/startPart1.js",
-        "startPart2": "npm run lint && tsc && node ./dist/startPart2.js",
+        "part1": "npm run lint && tsc && node ./dist/part1.js",
+        "part2": "npm run lint && tsc && node ./dist/part2.js",
         "lint": "eslint . --ext .ts",
         "generateDay": "node generateDay.js"
     },

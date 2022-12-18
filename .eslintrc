@@ -9,6 +9,7 @@
         "prettier"
     ],
     "rules": {
-        "semi": 1
+        "semi": 1,
+        "prefer-const": "warn"
     }
 }

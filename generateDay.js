@@ -15,8 +15,8 @@ advent();`;
 const startPart2Boilerplate = `import advent from "./${day}/part2";
 advent();`;
 
-fs.writeFileSync("./src/startPart1.ts", startPart1Boilerplate);
-fs.writeFileSync("./src/startPart2.ts", startPart2Boilerplate);
+fs.writeFileSync("./src/part1.ts", startPart1Boilerplate);
+fs.writeFileSync("./src/part2.ts", startPart2Boilerplate);
 
 if (!fs.existsSync("./src/" + day)) {
     fs.mkdirSync("./src/" + day);
