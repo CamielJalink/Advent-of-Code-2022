@@ -8,7 +8,7 @@ export default function advent() {
 }
 
 function determineMonkeyBusiness(strMonkeys: string[]) {
-    let monkeys: Monkey[] = [];
+    const monkeys: Monkey[] = [];
     strMonkeys.forEach((strMonkey) => {
         monkeys.push(new Monkey(strMonkey));
     });
